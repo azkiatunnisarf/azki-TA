@@ -18,7 +18,7 @@ mysql -u root -psecret -e "CREATE USER 'homestead'@'localhost' IDENTIFIED BY 'se
 mysql -u root -psecret -e "GRANT ALL PRIVILEGES ON homestead.* TO 'homestead'@'localhost';"
 mysql -u root -psecret -e "FLUSH PRIVILEGES;"
 
-echo "(nginx) Installing Nginx web server..."
+echo " Installing web server..."
 #sudo apt-get install -y nginx
 sudo apt-get install -y apache2
 
@@ -28,7 +28,7 @@ sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-curl php5-mysq
 sudo php5enmod mcrypt
 sudo a2enmod rewrite
 
-VHOST=$(cat <<EOF
+VHOST=$cat <<EOF
 
 <VirtualHost *:80>
     DocumentRoot
@@ -43,7 +43,7 @@ MultiViews
 
 </VirtualHost>
 
-EOF)
+EOF
 
 
 echo "${VHOST}" > /etc/apache2/sites-available/000-default.conf
@@ -57,8 +57,9 @@ composer self-update --update-keys
 
 echo "Installing and configuring Laravel..."
 
-cd code
-sudo chmod -R 777 /Users/nisafajriyati/Documents/College/TA/azki-TA/code
-sudo chmod -R 777 /Users/nisafajriyati/Documents/College/TA/azki-TA/code/storage
+cd /var/www/html
+git clone https://github.com/azkiatunnisarf/azki-TA.git
+sudo chmod -R 777 /var/www/html/azki-TA/code
+sudo chmod -R 777 /var/www/html/azki-TA/code/storage
 
 echo "Finished provisioning"
