@@ -14,13 +14,13 @@ pipeline {
 
   stages {
     stage('Checkout') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/Jenkins']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/azkiatunnisarf/azki-TA']]])
+        checkout([$class: 'GitSCM', branches: [[name: '*/pipeline']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/azkiatunnisarf/azki-TA']]])
     }
 
     // Build
     stage('Build') {
       agent {
-        label 'master'
+        label 'pipeline'
       }
       steps {
         deleteDir()
@@ -31,7 +31,7 @@ pipeline {
     // Static Code Analysis
     stage('Static Code Analysis') {
       agent {
-        label 'master'
+        label 'pipeline'
       }
       steps {
         deleteDir()
@@ -43,7 +43,7 @@ pipeline {
     // Unit Tests
     stage('Unit Tests') {
       agent {
-        label 'master'
+        label 'pipeline'
       }
       steps {
         deleteDir()
@@ -55,7 +55,7 @@ pipeline {
     // Acceptance Tests
     stage('Acceptance Tests') {
       agent {
-        label 'master'
+        label 'pipeline'
       }
       steps {
         deleteDir()
